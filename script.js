@@ -18,26 +18,32 @@ var container = document.getElementById("quizContainer");
 var questionEl = document.getElementById("question");
 var resultCount = document.getElementById("result");
 
-function loadQuestion (questionsIndex){
-    var q = questions[questionIndex];
-    questionEl.textContent = 
-    opt1.textContent = choices[0];
-    opt2.textContent = choices[1];
-    opt3.textContent = choices[2];
-    opt4.textContent = choices[3];
-}
+    var question = document.getElementById("question");
+
+    var opt1 = document.getElementById("opt1");
+    var opt2 = document.getElementById("opt2");
+    var opt3 = document.getElementById("opt3");
+    var opt4 = document.getElementById("opt4");
+
+    question.textContent = questions[0].title;
+    opt1.textContent = questions[0].choices[0];
+    opt2.textContent = questions[0].choices[1];
+    opt3.textContent = questions[0].choices[2];
+    opt4.textContent = questions[0].choices[3];
+
 
 function loadNextQuestion (){
-    var selectedOption = document.querySelector("input[type=")
 
 }
 
 // Check right answer
 var answer = selectedOption.value;
-if(questions[currentQuestion].answer == answer){
+if(questions[currentQuestion].answer === answer){
     score += 1;
 }
 
+
+//Timer
 function startTimer(card) {
     var time = 15;
     var intervalId = setInterval(function () {
