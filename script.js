@@ -25,37 +25,53 @@ var resultCount = document.getElementById("result");
     var opt3 = document.getElementById("opt3");
     var opt4 = document.getElementById("opt4");
 
+    // I can use a function that creates name for all objects.
     question.textContent = questions[0].title;
     opt1.textContent = questions[0].choices[0];
     opt2.textContent = questions[0].choices[1];
     opt3.textContent = questions[0].choices[2];
     opt4.textContent = questions[0].choices[3];
 
+        //Timer
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+        
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+        
+                display.textContent = minutes + ":" + seconds;
+        
+                if (--timer < 0) {
+                    timer = 0;
+                    resultInfo ();
+                }
+            }, 1000);
+        }
+        
+        window.onload = function () {
+            var timerTime = 5;
+                display = document.querySelector('#timer');
+            startTimer(timerTime, display);
+        };
+        
 
 function loadNextQuestion (){
-
 }
 
 // Check right answer
-var answer = selectedOption.value;
-if(questions[currentQuestion].answer === answer){
-    score += 1;
+function loadNextQuestion(){
+    var selectedOption = document.querySelector(".with-gap")
+    if(!selectedOption){
+        alert("Please select your answer!");
+        return
+    }
+    var answer = selectedOption.value;
+    if(questions[currentQuestion].answer == answer){
+        score++;
+    }
 }
 
 
-//Timer
-function startTimer(card) {
-    var time = 15;
-    var intervalId = setInterval(function () {
-        time--;
-        var timeDisplay = document.getElementById("timer-countdown");
-        if (timeDisplay) {
-            timeDisplay.textContent = time;
-        }
-        if (time === 0) {
-            buildCard(card, false, null, true);
-            clearInterval(intervalId);
-        }
-    }, 1000);
-    return intervalId;
-}
